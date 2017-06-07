@@ -1,53 +1,81 @@
-#**Finding Lane Lines on the Road** 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+# **Finding Lane Lines on the Road** 
 
-<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
-
-Overview
 ---
 
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+**Finding Lane Lines on the Road**
 
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
-
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
-
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
+The goals / steps of this project are the following:
+* Make a pipeline that finds lane lines on the road
+* Reflect on your work in a written report
 
 
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
+[//]: # (Image References)
 
-1. Describe the pipeline
-
-2. Identify any shortcomings
-
-3. Suggest possible improvements
-
-We encourage using images in your writeup to demonstrate how your pipeline works.  
-
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
-
-
-The Project
+[image1]: ./test_images_output/solidWhiteCurve.jpg "SolidWhiteCurve"
+[image2]: ./test_images_output/solidWhiteRight.jpg "SolidWhiteRight"
+[image3]: ./test_images_output/solidYellowCurve.jpg "SolidYellowCurve"
+[image4]: ./test_images_output/solidYellowCurve2.jpg "SolidYellowCurve2"
+[image5]: ./test_images_output/solidYellowLeft.jpg "SolidYellowLeft"
+[image6]: ./test_images_output/whiteCarLaneSwitch.jpg "WhiteCarLaneSwitch"
 ---
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
+### Reflection
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
+### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-**Step 2:** Open the code in a Jupyter Notebook
+工作流程
 
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
+这个流程包括6个步骤:
 
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
+1. 将摄像头拍摄的RGB彩色图片转变成灰度图片。
 
-`> jupyter notebook`
+2. 对上面的灰度图片加入高斯模糊。这样做的目的是为了让我们关注具有强烈对比的图片中的边缘，减弱噪声边缘的影响。
 
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
+3. 通过Canny边缘识别算法对上面的图片进行边缘识别,找出车道线的位置。
 
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
+4. 我们找到了很多个边缘，然后划定一个只有车道线的边缘四边形区域，并只显示这个区域内的边缘。
 
+5. 通过Hough变换,画出上面的图片的车道线。
+
+6. 将步骤5中的图片与原始图片结合则产生了识别出车道线的图片。
+
+下面是结果图：
+
+![alt text][image1]
+
+![alt text][image2]
+
+![alt text][image3]
+
+![alt text][image4]
+
+![alt text][image5]
+
+![alt text][image6]
+
+两个视频项目处理：将视频分解成一张张图片，将图片按上面6步处理完后再还原成视频，并保留到[test_videos_output](https://github.com/zhixiongruan/Finding-Lane-Lines/tree/master/test_videos_output)文件夹下。
+
+
+### 2. Identify potential shortcomings with your current pipeline
+
+
+有以下几个缺点：
+
+1.容易受旁边车辆影响，如果突然出来一辆车并闯进四边形区域里，车道线会出现混乱；
+
+2.应该还有更好的优化方法，但我现在没找到，通过以后的学习再来进行优化；
+
+3.挑战视频没完成，要完成它还需要一些知识和时间。
+
+
+### 3. Suggest possible improvements to your pipeline
+
+建议：
+
+1.加强python的学习；
+
+2.加强英语的学习；
+
+3.多查看文档。
+
+这个项目还有很大改进空间，以后我会继续优化它。

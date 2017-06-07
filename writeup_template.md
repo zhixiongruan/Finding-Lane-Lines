@@ -11,33 +11,71 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
-
+[image1]: ./test_images_output/solidWhiteCurve.jpg "SolidWhiteCurve"
+[image2]: ./test_images_output/solidWhiteRight.jpg "SolidWhiteRight"
+[image3]: ./test_images_output/solidYellowCurve.jpg "SolidYellowCurve"
+[image4]: ./test_images_output/solidYellowCurve2.jpg "SolidYellowCurve2"
+[image5]: ./test_images_output/solidYellowLeft.jpg "SolidYellowLeft"
+[image6]: ./test_images_output/whiteCarLaneSwitch.jpg "WhiteCarLaneSwitch"
 ---
 
 ### Reflection
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+工作流程
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+这个流程包括6个步骤:
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+1. 将摄像头拍摄的RGB彩色图片转变成灰度图片。
+
+2. 对上面的灰度图片加入高斯模糊。这样做的目的是为了让我们关注具有强烈对比的图片中的边缘，减弱噪声边缘的影响。
+
+3. 通过Canny边缘识别算法对上面的图片进行边缘识别,找出车道线的位置。
+
+4. 我们找到了很多个边缘，然后划定一个只有车道线的边缘四边形区域，并只显示这个区域内的边缘。
+
+5. 通过Hough变换,画出上面的图片的车道线。
+
+6. 将步骤5中的图片与原始图片结合则产生了识别出车道线的图片。
+
+下面是结果图：
 
 ![alt text][image1]
+
+![alt text][image2]
+
+![alt text][image3]
+
+![alt text][image4]
+
+![alt text][image5]
+
+![alt text][image6]
+
+两个视频项目处理：将视频分解成一张张图片，将图片按上面6步处理完后再还原成视频，并保留到[test_videos_output](https://github.com/zhixiongruan/Finding-Lane-Lines/tree/master/test_videos_output)文件夹下。
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+有以下几个缺点：
 
-Another shortcoming could be ...
+1.容易受旁边车辆影响，如果突然出来一辆车并闯进四边形区域里，车道线会出现混乱；
+
+2.应该还有更好的优化方法，但我现在没找到，通过以后的学习再来进行优化；
+
+3.挑战视频没完成，要完成它还需要一些知识和时间。
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+建议：
 
-Another potential improvement could be to ...
+1.加强python的学习；
+
+2.加强英语的学习；
+
+3.多查看文档。
+
+这个项目还有很大改进空间，以后我会继续优化它。
