@@ -9,16 +9,6 @@ The goals / steps of this project are the following:
 * Reflect on your work in a written report
 
 
-[//]: # (Image References)
-
-[image1]: ./test_images_output/solidWhiteCurve.jpg "SolidWhiteCurve"
-[image2]: ./test_images_output/solidWhiteRight.jpg "SolidWhiteRight"
-[image3]: ./test_images_output/solidYellowCurve.jpg "SolidYellowCurve"
-[image4]: ./test_images_output/solidYellowCurve2.jpg "SolidYellowCurve2"
-[image5]: ./test_images_output/solidYellowLeft.jpg "SolidYellowLeft"
-[image6]: ./test_images_output/whiteCarLaneSwitch.jpg "WhiteCarLaneSwitch"
----
-
 ### Reflection
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
@@ -41,17 +31,17 @@ The goals / steps of this project are the following:
 
 下面是结果图：
 
-![alt text][image1]
+<img src="test_images_output/solidWhiteCurve.jpg" width="480" alt="Combined Image" />
 
-![alt text][image2]
+<img src="test_images_output/solidWhiteRight.jpg" width="480" alt="Combined Image" />
 
-![alt text][image3]
+<img src="test_images_output/solidYellowCurve.jpg" width="480" alt="Combined Image" />
 
-![alt text][image4]
+<img src="test_images_output/solidYellowCurve2.jpg" width="480" alt="Combined Image" />
 
-![alt text][image5]
+<img src="test_images_output/solidYellowLeft.jpg" width="480" alt="Combined Image" />
 
-![alt text][image6]
+<img src="test_images_output/whiteCarLaneSwitch.jpg" width="480" alt="Combined Image" />
 
 两个视频项目处理：将视频分解成一张张图片，将图片按上面6步处理完后再还原成视频，并保留到[test_videos_output](https://github.com/zhixiongruan/Finding-Lane-Lines/tree/master/test_videos_output)文件夹下。
 

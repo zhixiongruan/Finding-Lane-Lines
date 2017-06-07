@@ -9,16 +9,6 @@ The goals / steps of this project are the following:
 * Reflect on your work in a written report
 
 
-[//]: # (Image References)
-
-[image1]: ./test_images_output/solidWhiteCurve.jpg "SolidWhiteCurve"
-[image2]: ./test_images_output/solidWhiteRight.jpg "SolidWhiteRight"
-[image3]: ./test_images_output/solidYellowCurve.jpg "SolidYellowCurve"
-[image4]: ./test_images_output/solidYellowCurve2.jpg "SolidYellowCurve2"
-[image5]: ./test_images_output/solidYellowLeft.jpg "SolidYellowLeft"
-[image6]: ./test_images_output/whiteCarLaneSwitch.jpg "WhiteCarLaneSwitch"
----
-
 ### Reflection
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
@@ -39,19 +29,8 @@ The goals / steps of this project are the following:
 
 6. 将步骤5中的图片与原始图片结合则产生了识别出车道线的图片。
 
-下面是结果图：
+[结果图](https://github.com/zhixiongruan/Finding-Lane-Lines/tree/master/test_images_output)
 
-![alt text][image1]
-
-![alt text][image2]
-
-![alt text][image3]
-
-![alt text][image4]
-
-![alt text][image5]
-
-![alt text][image6]
 
 两个视频项目处理：将视频分解成一张张图片，将图片按上面6步处理完后再还原成视频，并保留到[test_videos_output](https://github.com/zhixiongruan/Finding-Lane-Lines/tree/master/test_videos_output)文件夹下。
 
